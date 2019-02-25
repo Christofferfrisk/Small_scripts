@@ -46,7 +46,7 @@ if __name__ == '__main__':
         
         for x1, x2 in v.exonpos:
             x1_rel = x1-imin
-            x2_rel = x2-imin+1
+            x2_rel = x2-imin
             arr[x1_rel:x2_rel] = 1
 
         print(k, np.count_nonzero(arr)+1)
