@@ -22,17 +22,18 @@ if __name__ == '__main__':
     dGenes = dict()
     
     with open(gtffile, 'r') as f:
-        for line in f:
-            if '##' not in line:
-               # print(line)
-                if 'gene' == line.split()[2]:
-                    genename = line.split('\"')[1]
+        for i, line in enumerate(f):
+            if '#!' not in line:
+                #if 'gene' == line.split()[2]:
+                genename = line.split('\"')[1]
+                if genename not in dGenes:
                     obj = ensembl(genename)
                     dGenes[genename] = obj
-
-                elif 'exon' == line.split()[2]:
+                
+                if 'exon' == line.split()[2]:
                     genename = line.split('\"')[1]
-                    exonname = str(line.split('exon_id')[1].split()[0].split('\"')[1])
+                    #exonname = str(line.split('exon_id')[1].split()[0].split('\"')[1])
+                    exonname = genename+str(i)
                     dGenes[genename].add_exon(exonname, int(line.split()[3]), int(line.split()[4]))
 
                 else:
